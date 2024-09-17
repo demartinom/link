@@ -2,8 +2,8 @@ package parser
 
 import (
 	"fmt"
+	"io"
 	"log"
-	"os"
 
 	"golang.org/x/net/html"
 )
@@ -14,16 +14,15 @@ type Link struct {
 	Text string
 }
 
-func Parse(file *os.File) {
+func Parse(r io.Reader) {
 	// Create slice of Links
 	links := []Link{}
 
 	// Parse html
-	doc, err := html.Parse(file)
+	doc, err := html.Parse(r)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
 
 	// Init function for recursion
 	var reading func(*html.Node)
