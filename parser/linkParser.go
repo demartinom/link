@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"fmt"
 	"io"
 	"log"
 
@@ -14,7 +13,7 @@ type Link struct {
 	Text string
 }
 
-func Parse(r io.Reader) {
+func Parse(r io.Reader) []Link {
 	// Create slice of Links
 	var links []Link
 
@@ -53,11 +52,8 @@ func Parse(r io.Reader) {
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			reading(c)
 		}
-
 	}
 	reading(doc)
-	// Print out Link structs in slice
-	for _, link := range links {
-		fmt.Printf("%+v\n", link)
-	}
+
+	return links
 }

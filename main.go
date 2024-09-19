@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 
@@ -20,5 +21,10 @@ func main() {
 	}
 	defer file.Close()
 
-	parser.Parse(file)
+	parsedData := parser.Parse(file)
+
+	// Print out Link structs in slice
+	for _, link := range parsedData {
+		fmt.Printf("%+v\n", link)
+	}
 }
