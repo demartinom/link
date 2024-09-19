@@ -8,7 +8,7 @@ import (
 	"golang.org/x/net/html"
 )
 
-// struct for saving links
+// Link struct for saving links
 type Link struct {
 	Href string
 	Text string
@@ -16,7 +16,7 @@ type Link struct {
 
 func Parse(r io.Reader) {
 	// Create slice of Links
-	links := []Link{}
+	var links []Link
 
 	// Parse html
 	doc, err := html.Parse(r)
@@ -33,7 +33,7 @@ func Parse(r io.Reader) {
 		if n.Type == html.ElementNode && n.Data == "a" {
 			// Init Link struct to store result
 			var link Link
-			// Find link in a tag and save to sstrcut
+			// Find link in a tag and save to struct
 			for _, a := range n.Attr {
 				if a.Key == "href" {
 					link.Href = a.Val
